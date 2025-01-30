@@ -36,7 +36,8 @@ async function searchDatabase() {
         // Count the number of data points
         let dataPointCount = groupedData[reference].length;
 
-        let tableHTML = `<h3>${reference} (Data Points: ${dataPointCount})</h3>`;
+        let tableHTML = `<h3>${reference}</h3>`;
+        tableHTML += `<h4>Number of Data Points: ${dataPointCount}</h4>`
         tableHTML += `
             <table border="1">
                 <tr>
