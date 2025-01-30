@@ -14,12 +14,7 @@ async function searchDatabase() {
     
         let resultsDiv = document.getElementById("results");
         resultsDiv.innerHTML = ""; // Clear previous results
-    
-        if (chemForm === "") {
-            resultsDiv.innerHTML = `<p>Please enter a component in the search field.</p>`;
-            return;
-        }
-        
+
         let filteredData = data.filter(entry => 
             entry.ChemForm.toLowerCase().includes(chemForm.toLowerCase()) &&
             entry.Temp >= minTemp && entry.Temp <= maxTemp &&
