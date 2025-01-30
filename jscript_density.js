@@ -33,7 +33,11 @@ async function searchDatabase() {
         // Sort data by Concentration in ascending order
         groupedData[reference].sort((a, b) => a.Conc - b.Conc);
 
+        // Count the number of data points
+        let dataPointCount = groupedData[reference].length;
+
         let tableHTML = `<h3>${reference}</h3>`;
+        tableHTML = `<h4>Number of Data Points: ${dataPointCount}</h4>`;
         tableHTML += `
             <table border="1">
                 <tr>
