@@ -9,15 +9,6 @@ async function searchDatabase() {
     let maxPres = parseFloat(document.getElementById("maxPres").value) || Infinity;
     let minConc = parseFloat(document.getElementById("minConc").value) || -Infinity;
     let maxConc = parseFloat(document.getElementById("maxConc").value) || Infinity;
-
-    let resultsDiv = document.getElementById("results");
-    resultsDiv.innerHTML = ""; // Clear previous results
-
-    // If ChemForm is empty, show an error message and return
-    if (chemForm === "") {
-        resultsDiv.innerHTML = `<p style="color: red;">Please enter a component in the search field.</p>`;
-        return;
-    }
     
     let filteredData = data.filter(entry => 
         entry.ChemForm.toLowerCase().includes(chemForm.toLowerCase()) &&
@@ -25,11 +16,6 @@ async function searchDatabase() {
         entry.Pres >= minPres && entry.Pres <= maxPres &&
         entry.Conc >= minConc && entry.Conc <= maxConc
     );
-
-    if (filteredData.length === 0) {
-        resultsDiv.innerHTML = `<p style="color: red;">No results found.</p>`;
-        return;
-    }
 
     let groupedData = {};
     filteredData.forEach(entry => {
