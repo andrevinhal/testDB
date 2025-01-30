@@ -10,12 +10,25 @@ async function searchDatabase() {
     let minConc = parseFloat(document.getElementById("minConc").value) || -Infinity;
     let maxConc = parseFloat(document.getElementById("maxConc").value) || Infinity;
 
+    let resultsDiv = document.getElementById("results");
+    resultsDiv.innerHTML = ""; // Clear previous results
+
+    if (chemForm === "") {
+        resultsDiv.innerHTML = `<p>Please enter a component in the search field.</p>`;
+        return;
+    }
+    
     let filteredData = data.filter(entry => 
         entry.ChemForm.toLowerCase().includes(chemForm.toLowerCase()) &&
         entry.Temp >= minTemp && entry.Temp <= maxTemp &&
         entry.Pres >= minPres && entry.Pres <= maxPres &&
         entry.Conc >= minConc && entry.Conc <= maxConc
     );
+
+    if (filteredData.length === 0) {
+        resultsDiv.innerHTML = `<p>No results found.</p>`;
+        return;
+    }
     
     let groupedData = {};
     filteredData.forEach(entry => {
