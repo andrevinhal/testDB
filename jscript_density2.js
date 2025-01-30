@@ -26,6 +26,11 @@ async function searchDatabase() {
             entry.Pres >= minPres && entry.Pres <= maxPres &&
             entry.Conc >= minConc && entry.Conc <= maxConc
         );
+
+        if (filteredData.length === 0){
+            resultsDiv.innerHTML = `<p>No data available.</p>`;
+            return;
+        }
         
         let groupedData = {};
         filteredData.forEach(entry => {
@@ -80,6 +85,6 @@ async function searchDatabase() {
         }
     } catch(error){
         console.error("Error:", error);
-        document.getElementById("results").innerHTML = `<p style="color: red;">No data available.</p>`;
+        document.getElementById("results").innerHTML = `<p>No data available.</p>`;
     }
 }
