@@ -13,7 +13,7 @@ async function searchDatabase() {
     let resultsDiv = document.getElementById("results");
     resultsDiv.innerHTML = ""; // Clear previous results
 
-    // ✅ If ChemForm is empty, show an error message and return
+    // If ChemForm is empty, show an error message and return
     if (chemForm === "") {
         resultsDiv.innerHTML = `<p style="color: red;">Please enter a component in the search field.</p>`;
         return;
