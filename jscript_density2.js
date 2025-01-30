@@ -12,9 +12,6 @@ async function searchDatabase() {
         let minConc = parseFloat(document.getElementById("minConc").value) || -Infinity;
         let maxConc = parseFloat(document.getElementById("maxConc").value) || Infinity;
     
-        let resultsDiv = document.getElementById("results");
-        resultsDiv.innerHTML = ""; // Clear previous results
-
         let filteredData = data.filter(entry => 
             entry.ChemForm.toLowerCase().includes(chemForm.toLowerCase()) &&
             entry.Temp >= minTemp && entry.Temp <= maxTemp &&
