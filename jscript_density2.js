@@ -11,18 +11,21 @@ async function searchDatabase() {
         let maxPres = parseFloat(document.getElementById("maxPres").value) || Infinity;
         let minConc = parseFloat(document.getElementById("minConc").value) || -Infinity;
         let maxConc = parseFloat(document.getElementById("maxConc").value) || Infinity;
-    
+
+        let resultsDiv = document.getElementById("results");
+        resultsDiv.innerHTML = "";
+
+        if (chemForm === ""){
+            resultsDiv.innerHTML = `<p>Please enter a component.</p>`;
+            return;
+        }
+        
         let filteredData = data.filter(entry => 
             entry.ChemForm.toLowerCase().includes(chemForm.toLowerCase()) &&
             entry.Temp >= minTemp && entry.Temp <= maxTemp &&
             entry.Pres >= minPres && entry.Pres <= maxPres &&
             entry.Conc >= minConc && entry.Conc <= maxConc
         );
-    
-        if (filteredData.length === 0) {
-            resultsDiv.innerHTML = `<p>No results found.</p>`;
-            return;
-        }
         
         let groupedData = {};
         filteredData.forEach(entry => {
@@ -32,10 +35,7 @@ async function searchDatabase() {
             }
             groupedData[reference].push(entry);
         });
-    
-        let resultsDiv = document.getElementById("results");
-        resultsDiv.innerHTML = "";
-    
+
         for (let reference in groupedData) {
             // Sort data by Concentration in ascending order
             groupedData[reference].sort((a, b) => a.Conc - b.Conc);
@@ -80,6 +80,6 @@ async function searchDatabase() {
         }
     } catch(error){
         console.error("Error:", error);
-        document.getElementById("results").innerHTML = `<p style="color: red;">Failed to load data.</p>`;
+        document.getElementById("results").innerHTML = `<p style="color: red;">No data available.</p>`;
     }
 }
