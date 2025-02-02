@@ -22,7 +22,8 @@ async function searchDatabase() {
         
         let filteredData = data.filter(entry => 
             entry.ChemForm.toLowerCase().includes(chemForm.toLowerCase()) &&
-            entry.Temp >= minTemp && entry.Temp <= maxTemp
+            entry.Temp >= minTemp && entry.Temp <= maxTemp &&
+            entry.InitConc >= minInitConc && entry.InitConc <= maxInitConc
         );
 
         if (filteredData.length === 0){
