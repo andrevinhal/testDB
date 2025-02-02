@@ -1,6 +1,6 @@
 async function searchDatabase() {
     try{
-        const response = await fetch('https://raw.githubusercontent.com/andrevinhal/testDB/refs/heads/main/density_data.json');
+        const response = await fetch('https://raw.githubusercontent.com/andrevinhal/testDB/refs/heads/main/heat_data.json');
         if (!response.ok) throw new Error("Failed to load database.");
         const data = await response.json();
         
