@@ -8,7 +8,7 @@ async function searchDatabase() {
         let minTemp = parseFloat(document.getElementById("minTemp").value) || -Infinity;
         let maxTemp = parseFloat(document.getElementById("maxTemp").value) || Infinity;
         let minInitConc = parseFloat(document.getElementById("minInitConc").value) || -Infinity;
-        let maxInitCon = parseFloat(document.getElementById("maxInitConc").value) || Infinity;
+        let maxInitConc = parseFloat(document.getElementById("maxInitConc").value) || Infinity;
         let minFinalConc = parseFloat(document.getElementById("minFinalConc").value) || -Infinity;
         let maxFinalConc = parseFloat(document.getElementById("maxFinalConc").value) || Infinity;
 
