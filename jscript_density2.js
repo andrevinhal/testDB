@@ -1,7 +1,5 @@
 async function searchDatabase() {
-    try{
-        //const response = await fetch('https://raw.githubusercontent.com/andrevinhal/testDB/refs/heads/main/density_data.json');
-
+    try {
         const gitlabToken = "glpat-JhZ3yTCVBy1DzxaVN_zi";
         const filePath = "Database Creation/SRC_json/purecomp_data.json";
         const projectID = "6900";
@@ -13,10 +11,16 @@ async function searchDatabase() {
             }
         });
 
-        
-        if (!response.ok) throw new Error("Failed to load database.");
-        const data = await response.json();
-        
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Failed to load database: ${errorText}`);
+        }
+
+        const responseText = await response.text();
+        console.log("Response Text:", responseText); // Log the response text
+
+        const data = JSON.parse(responseText); // Parse the response text as JSON
+
         let chemForm = document.getElementById("searchChemForm").value.trim();
         let minTemp = parseFloat(document.getElementById("minTemp").value) || -Infinity;
         let maxTemp = parseFloat(document.getElementById("maxTemp").value) || Infinity;
@@ -28,11 +32,11 @@ async function searchDatabase() {
         let resultsDiv = document.getElementById("results");
         resultsDiv.innerHTML = "";
 
-        if (chemForm === ""){
+        if (chemForm === "") {
             resultsDiv.innerHTML = `<p>Please enter a component.</p>`;
             return;
         }
-        
+
         let filteredData = data.filter(entry => 
             entry.ChemForm.toLowerCase().includes(chemForm.toLowerCase()) &&
             entry.Temp >= minTemp && entry.Temp <= maxTemp &&
@@ -40,11 +44,11 @@ async function searchDatabase() {
             entry.Conc >= minConc && entry.Conc <= maxConc
         );
 
-        if (filteredData.length === 0){
+        if (filteredData.length === 0) {
             resultsDiv.innerHTML = `<p>No data available.</p>`;
             return;
         }
-        
+
         let groupedData = {};
         filteredData.forEach(entry => {
             let reference = `${entry.Authors}, ${entry.Journal}, ${entry.Publication}`;
@@ -55,12 +59,10 @@ async function searchDatabase() {
         });
 
         for (let reference in groupedData) {
-            // Sort data by Concentration in ascending order
             groupedData[reference].sort((a, b) => a.Conc - b.Conc);
-    
-            // Count the number of data points
+
             let dataPointCount = groupedData[reference].length;
-    
+
             let tableHTML = `<h3>${reference}</h3>`;
             tableHTML += `<h4>Number of Data Points: ${dataPointCount}</h4>`
             tableHTML += `
@@ -81,7 +83,7 @@ async function searchDatabase() {
                     </tr>
                 </table>
             `;
-    
+
             tableHTML += `<table border="1"><tr><th>Conc</th><th>Temp</th><th>Pres</th><th>Density</th></tr>`;
             groupedData[reference].forEach(entry => {
                 tableHTML += `
@@ -96,7 +98,7 @@ async function searchDatabase() {
             tableHTML += `</table><br>`;
             resultsDiv.innerHTML += tableHTML;
         }
-    } catch(error){
+    } catch (error) {
         console.error("Error:", error);
         document.getElementById("results").innerHTML = `<p>No data available.</p>`;
     }
