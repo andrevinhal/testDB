@@ -1,16 +1,17 @@
 async function searchDatabase() {
     try {
-        const gitlabToken = "glpat-JhZ3yTCVBy1DzxaVN_zi";
-        const filePath = "Database Creation/SRC_json/purecomp_data.json";
-        const projectID = "6900";
-        const encodedFilePath = encodeURIComponent(filePath);
+        //const gitlabToken = "glpat-JhZ3yTCVBy1DzxaVN_zi";
+        //const filePath = "Database Creation/SRC_json/purecomp_data.json";
+        //const projectID = "6900";
+        //const encodedFilePath = encodeURIComponent(filePath);
 
-        const response = await fetch(`https://gitlab.com/api/v4/projects/${projectID}/repository/files/${encodedFilePath}/raw?ref=master`, {
-            headers: {
-                "PRIVATE-TOKEN": gitlabToken
-            }
-        });
+        //const response = await fetch(`https://gitlab.com/api/v4/projects/${projectID}/repository/files/${encodedFilePath}/raw?ref=master`, {
+        //    headers: {
+        //        "PRIVATE-TOKEN": gitlabToken
+        //    }
+        //});
 
+        const response = await fetch('https://gitlab.gbar.dtu.dk/api/v4/projects/6900/repository/files/Database%20Creation%2FSRC_json%2Fpurecomp_data.json/raw?ref=master');
         if (!response.ok) {
             const errorText = await response.text();
             throw new Error(`Failed to load database: ${errorText}`);
