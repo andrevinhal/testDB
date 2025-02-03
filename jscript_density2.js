@@ -1,6 +1,19 @@
 async function searchDatabase() {
     try{
-        const response = await fetch('https://raw.githubusercontent.com/andrevinhal/testDB/refs/heads/main/density_data.json');
+        //const response = await fetch('https://raw.githubusercontent.com/andrevinhal/testDB/refs/heads/main/density_data.json');
+
+        const gitlabToken = "glpat-JhZ3yTCVBy1DzxaVN_zi";
+        const filePath = "Database Creation/SRC_json/purecomp_data.json";
+        const projectID = "6900";
+        const encodedFilePath = encodeURIComponent(filePath);
+
+        const response = await fetch(`https://gitlab.com/api/v4/projects/${projectID}/repository/files/${encodedFilePath}/raw?ref=main`, {
+            headers: {
+                "PRIVATE-TOKEN": gitlabToken
+            }
+        });
+
+        
         if (!response.ok) throw new Error("Failed to load database.");
         const data = await response.json();
         
