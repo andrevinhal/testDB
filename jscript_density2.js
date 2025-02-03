@@ -1,7 +1,7 @@
 async function searchDatabase() {
     try {
         const gitlabToken = "glpat-AXyvHkunJMtQTPzz2DiX";
-        const filePath = "Database Creation/SRC_json/purecomp_data.json";
+        const filePath = "Database Creation/SRC_json/density_data.json";
         const projectID = "6900";
         const encodedFilePath = encodeURIComponent(filePath);
 
