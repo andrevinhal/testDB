@@ -7,7 +7,7 @@ async function searchDatabase() {
         const projectID = "6900";
         const encodedFilePath = encodeURIComponent(filePath);
 
-        const response = await fetch(`https://gitlab.com/api/v4/projects/${projectID}/repository/files/${encodedFilePath}/raw?ref=main`, {
+        const response = await fetch(`https://gitlab.com/api/v4/projects/${projectID}/repository/files/${encodedFilePath}/raw?ref=master`, {
             headers: {
                 "PRIVATE-TOKEN": gitlabToken
             }
